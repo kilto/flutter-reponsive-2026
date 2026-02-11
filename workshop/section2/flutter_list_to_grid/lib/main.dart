@@ -25,6 +25,7 @@ class CatalogScreen extends StatelessWidget {
     'https://images.unsplash.com/photo-1521412644187-c49fa049e84d',
     'https://images.unsplash.com/photo-1509027572446-af8401acfdc3',
     'https://images.unsplash.com/photo-1546519638-68e109498ffc',
+
   ];
 
   @override
@@ -32,9 +33,21 @@ class CatalogScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Catalog'),
-        actions: const [Icon(Icons.filter_list), SizedBox(width: 12), Icon(Icons.help_outline), SizedBox(width: 12)],
+        actions: const [
+          Icon(Icons.filter_list),
+          SizedBox(width: 12),
+          Icon(Icons.help_outline),
+          SizedBox(width: 12)
+        ],
       ),
-      body: ListView.builder(
+      body: GridView.builder(
+        padding: const EdgeInsets.all(8),
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 400, // Maximum width for each grid item
+          childAspectRatio: 4 / 3,
+          crossAxisSpacing: 8,
+          mainAxisSpacing: 8,
+        ),
         itemCount: images.length,
         itemBuilder: (context, index) {
           return AspectRatio(
@@ -53,9 +66,12 @@ class CatalogScreen extends StatelessWidget {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 1,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.camera_alt_outlined), label: 'Quick capture'),
-          BottomNavigationBarItem(icon: Icon(Icons.image_outlined), label: 'All images'),
-          BottomNavigationBarItem(icon: Icon(Icons.cloud_upload_outlined), label: 'Bulk upload'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.camera_alt_outlined), label: 'Quick capture'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.image_outlined), label: 'All images'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.cloud_upload_outlined), label: 'Bulk upload'),
         ],
       ),
     );
